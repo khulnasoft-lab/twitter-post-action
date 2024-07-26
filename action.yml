@@ -1,5 +1,5 @@
 name: twitter-post-action
-description: posts tweets on Twitter
+description: posts tweets github action
 author: KhulnaSoft
 
 inputs:
@@ -24,24 +24,8 @@ outputs:
     description: "Post's title"
 
 runs:
-  using: "composite"
-  steps:      
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: 3.x
-
-    - name: Install dependencies
-      run: |
-        pip install tweepy
-      shell: bash
-
-    - name: Run tweet script
-      run: python3 publish.py ${{ inputs.api_key }} ${{ inputs.api_key_secret }} ${{ inputs.access_token }} ${{ inputs.access_token_secret }} "${{ inputs.status }}" 
-      shell: bash
+  using: "node16"
+  main: "index.js"
 
 branding:
   icon: "message-circle"
